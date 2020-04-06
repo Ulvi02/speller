@@ -23,7 +23,7 @@ node *create_new_node(char word[LENGTH + 1]) {
 }
 
 // Number of buckets in hash table
-const unsigned int N = 1;
+const unsigned int N = 583570837;
 
 // Hash table
 node *table[N];
@@ -38,8 +38,14 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
-    return 0;
+    // Implementation of djb2
+    unsigned int hashAddress = 5381;
+    for (int counter = 0; word[counter]!='\0'; counter++)
+    {
+      hashAddress = ((hashAddress << 5) + hashAddress) + word[counter];
+    }
+    printf("%i\n", hashAddress);
+    return hashAddress;
 }
 
 // Loads dictionary into memory, returning true if successful else false
