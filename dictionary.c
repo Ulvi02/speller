@@ -34,8 +34,17 @@ node *table[N];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    int hash_lookup = hash(word);
-    if (strcasecmp(table[hash_lookup]->word, word) == 0)
+    int hash_lookup = hash(word); // Hash the word to compare
+    node *current_node; // Set node to search list
+    current_node = table[hash_lookup]; // Set list to hash
+    int index = 0;
+
+    while (current_node != NULL && strcasecmp(current_node->word, word) != 0)
+    {
+      index++;
+      current_node = current_node->next;
+    }
+    if (strcasecmp(current_node->word, word) == 0)
     {
       return true;
     }
