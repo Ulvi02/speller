@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "dictionary.h"
 
 // Represents a node in a hash table
@@ -12,6 +13,14 @@ typedef struct node
     struct node *next;
 }
 node;
+
+// Create new node function
+node *create_new_node(char word[LENGTH + 1]) {
+  node *result = malloc(sizeof(node));
+  strcpy(result->word, word);
+  result->next = NULL;
+  return result;
+}
 
 // Number of buckets in hash table
 const unsigned int N = 1;
@@ -44,12 +53,16 @@ bool load(const char *dictionary)
     }
 
     char word[LENGTH + 1];
+    node *tmp;
+    node *head;
 
     while (fscanf(dict, "%s", word) != EOF) //Condition to read whole of dict
     {
-      printf("%s\n", word);
+      tmp = create_new_node(word);
+      tmp->next = head;
+      head = tmp;
     }
-
+    // TODO - make the head go to the hash value of the word
     return false;
 }
 
