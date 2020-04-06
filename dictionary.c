@@ -39,7 +39,6 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     // Implementation of djb2
-    // http://www.cse.yorku.ca/~oz/hash.html
     unsigned int hashAddress = 5381;
     for (int counter = 0; word[counter]!='\0'; counter++)
     {
