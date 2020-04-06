@@ -4,7 +4,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include "dictionary.h"
+
+int word_count = 0;
 
 // Represents a node in a hash table
 typedef struct node
@@ -31,8 +34,15 @@ node *table[N];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
-    return false;
+    int hash_lookup = hash(word);
+    if (strcasecmp(table[hash_lookup]->word, word) == 0)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
 }
 
 // Hashes word to a number
@@ -66,17 +76,16 @@ bool load(const char *dictionary)
       int result = hash(word);
       tmp->next = table[result];
       table[result] = tmp;
+      word_count++;
       return true;
     }
-
     return false;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return word_count;
 }
 
 // Unloads dictionary from memory, returning true if successful else false
