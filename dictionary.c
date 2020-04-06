@@ -54,15 +54,16 @@ bool load(const char *dictionary)
 
     char word[LENGTH + 1];
     node *tmp;
-    node *head;
 
     while (fscanf(dict, "%s", word) != EOF) //Condition to read whole of dict
     {
       tmp = create_new_node(word);
-      tmp->next = head;
-      head = tmp;
+      int result = hash(word);
+      tmp->next = table[result];
+      table[result] = tmp;
+      return true;
     }
-    // TODO - make the head go to the hash value of the word
+
     return false;
 }
 
