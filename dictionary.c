@@ -44,7 +44,6 @@ unsigned int hash(const char *word)
     {
       hashAddress = ((hashAddress << 5) + hashAddress) + word[counter];
     }
-    printf("%i\n", hashAddress);
     return hashAddress;
 }
 
