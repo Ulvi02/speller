@@ -54,13 +54,17 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // Implementation of djb2
-    unsigned int hashAddress = 5381;
-    for (int counter = 0; word[counter]!='\0'; counter++)
+  int hash, i; // Jenkins "One at a Time" hash
+    for(hash = i = 0; i < strlen(word); ++i)
     {
-      hashAddress = ((hashAddress << 5) + hashAddress) + word[counter];
+        hash += word[i];
+        hash += (hash << 10);
+        hash ^= (hash >> 6);
     }
-    return hashAddress;
+    hash += (hash << 3);
+    hash ^= (hash >> 11);
+    hash += (hash << 15);
+    return hash;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -83,9 +87,8 @@ bool load(const char *dictionary)
       tmp->next = table[result];
       table[result] = tmp;
       word_count++;
-      return true;
     }
-    return false;
+    return true;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
