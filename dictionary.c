@@ -41,17 +41,14 @@ bool check(const char *word)
 
     while (current_node != NULL && strcasecmp(current_node->word, word) != 0)
     {
+      if (strcasecmp(current_node->word, word) == 0)
+      {
+        return true;
+      }
       index++;
       current_node = current_node->next;
     }
-    if (strcasecmp(current_node->word, word) == 0)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return false;
 }
 
 // Hashes word to a number
