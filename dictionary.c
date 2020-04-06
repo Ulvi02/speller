@@ -36,12 +36,20 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    FILE * dict = fopen(dictionary, "r"); // Open file
+    FILE *dict = fopen(dictionary, "r"); // Open file
+
     if (dict == NULL)
     {
       return false;
     }
-    // TODO
+
+    char word[LENGTH + 1];
+
+    while (fscanf(dict, "%s", word) != EOF) //Condition to read whole of dict
+    {
+      printf("%s\n", word);
+    }
+
     return false;
 }
 
