@@ -94,6 +94,7 @@ bool load(const char *dictionary)
     // printf("Printed table[%i] reads %s\n", result, tmp->word);
     word_count++;
   }
+  fclose(dict);
   return true;
 }
 
@@ -123,7 +124,6 @@ bool unload(void)
       temp = crawler;
       free(temp);
     }
-    return true;
   }
-  return false;
+  return true;
 }
