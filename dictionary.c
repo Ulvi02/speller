@@ -35,19 +35,21 @@ node *table[N];
 bool check(const char *word)
 {
   int hash_lookup = hash(word);      // Hash the word to compare
-  node *current_node;                // Set node to search list
-  current_node = table[hash_lookup]; // Set list to hash
-  int index = 0;
+  node *crawler;                // Set node to search list
+  crawler = table[hash_lookup]; // Set list to hash
+  printf("Loaded table[%i]\n", hash_lookup);
 
-  while (current_node != NULL && strcasecmp(current_node->word, word) != 0)
+  while (crawler->next != NULL)
   {
-    if (strcasecmp(current_node->word, word) == 0)
+    if (strcasecmp(crawler->word, word) == 0)
     {
+      printf("Returning true\n");
       return true;
     }
-    index++;
-    current_node = current_node->next;
+    printf("Crawler going to next in list\n");
+    crawler = crawler->next;
   }
+  printf("Returning false\n");
   return false;
 }
 
@@ -86,6 +88,7 @@ bool load(const char *dictionary)
     int result = hash(word);
     tmp->next = table[result];
     table[result] = tmp;
+    // printf("Printed table[%i] reads %s\n", result, tmp->word);
     word_count++;
   }
   return true;
@@ -103,11 +106,11 @@ bool unload(void)
   node *temp; // Temp and crawler to seek and delete
   node *crawler;
 
-  for (int i = 0; i < N; i++)
+  for (int i = 0; i < N; i++) // Run for length of table
   {
-    if (table[i] != NULL)
+    if (table[i] != NULL) // If there's no node, ignore
     {
-      crawler = table[i];
+      crawler = table[i]; // Go to each node and free
       while (crawler != NULL)
       {
         temp = crawler->next;
