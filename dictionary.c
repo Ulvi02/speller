@@ -12,8 +12,8 @@ int word_count = 0;
 // Represents a node in a hash table
 typedef struct node
 {
-    char word[LENGTH + 1];
-    struct node *next;
+  char word[LENGTH + 1];
+  struct node *next;
 }
 node;
 
@@ -26,7 +26,7 @@ node *create_new_node(char word[LENGTH + 1]) {
 }
 
 // Number of buckets in hash table
-const unsigned int N = 583570837;
+const unsigned int N = 89696662;
 
 // Hash table
 node *table[N];
@@ -64,7 +64,7 @@ unsigned int hash(const char *word)
     hash += (hash << 3);
     hash ^= (hash >> 11);
     hash += (hash << 15);
-    return hash;
+    return (hash % N);
 }
 
 // Loads dictionary into memory, returning true if successful else false
