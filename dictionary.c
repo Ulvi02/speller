@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <strings.h>
+#include <ctype.h>
 #include "dictionary.h"
 
 int word_count = 0;
@@ -61,7 +62,7 @@ unsigned int hash(const char *word)
   int hash, i; // Jenkins "One at a Time" hash
   for (hash = i = 0; i < strlen(word); ++i)
   {
-    hash += word[i];
+    hash += tolower(word[i]);
     hash += (hash << 10);
     hash ^= (hash >> 6);
   }
