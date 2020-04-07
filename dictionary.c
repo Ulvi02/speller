@@ -37,19 +37,21 @@ bool check(const char *word)
   int hash_lookup = hash(word);      // Hash the word to compare
   node *crawler;                // Set node to search list
   crawler = table[hash_lookup]; // Set list to hash
-  printf("Loaded table[%i]\n", hash_lookup);
+  // printf("Loaded table[%i]\n", hash_lookup);
+  // printf("%p = %s\n", crawler, crawler->word);
 
-  while (crawler->next != NULL)
+  while (crawler != NULL)
   {
+    // printf("While look triggered, about to strcasecmp %s and %s", crawler->word, word);
     if (strcasecmp(crawler->word, word) == 0)
     {
-      printf("Returning true\n");
+      // printf("Returning true\n");
       return true;
     }
-    printf("Crawler going to next in list\n");
+    // printf("Crawler going to next in list\n");
     crawler = crawler->next;
   }
-  printf("Returning false\n");
+  // printf("Returning false\n");
   return false;
 }
 
